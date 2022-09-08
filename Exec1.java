@@ -1,84 +1,75 @@
+package com.gian.a1;
+
 import java.util.Scanner;
 
 public class Exec1 {
-    public static void main(String[] args){
 
-        Scanner entrada = new Scanner(System.in);
+	public static void main(String[] args) {
 
-        int num = 1;
-        int maior = 0;
-        int menor = 1000;
-        int k = 0;
-        int k2 = 0;
-        int principal = 0;
-        int secundaria = 0;
+		Scanner entrada = new Scanner(System.in);
+		int soma = 0;
+		double media = 0;
+		int maior = 0;
+		int menor = 0;
+		int kpar = 0;
+		int kimp = 0;
+		int principal = 0;
+		int secundaria = 0;
 
-        boolean fin = false;
+		System.out.println("Digite um n entre 3 e 11 incluindo 3 e 11: ");
+		int TAM = entrada.nextInt();
+		if (TAM % 2 == 1 && TAM >= 3 && TAM <= 11) {
+			int matriz[][] = new int[TAM][TAM];
+			for (int i = 0; i < TAM; i++) {
+				for (int j = 0; j < TAM; j++) {
+					matriz[i][j] = entrada.nextInt();
+					soma = soma + matriz[i][j];
+					if (maior == 0 || menor == 0) {
+						maior = matriz[i][j];
+						menor = matriz[i][j];
+					} else if (menor > matriz[i][j]) {
+						menor = matriz[i][j];
+					} else if (maior < matriz[i][j]) {
+						maior = matriz[i][j];
+					}
+					if (matriz[i][j] % 2 == 0) {
+						kpar = kpar + 1;
+					} else if (matriz[i][j] % 2 == 1) {
+						kimp = kimp + 1;
+					}
+					if (i == j) {
+						principal += matriz[i][j];
+					}
 
-        while(!fin)
-        {
-            num = entrada.nextInt();
+					else if ((i + j) == (TAM - 1)) {
+						secundaria += matriz[i][j];
+					}
 
-            if ( num < 3 || num > 11)
-            {
-                System.out.println("Invalido");
-            }
-            else if (num % 2 == 1)
-            {
-                fin = true;
-            }
-            else
-            {
-                System.out.println("Invalido");
-            }
-        }
+				}
+			}
+			for (int i = 0; i < TAM; i++) {
+				System.out.println("");
+				for (int j = 0; j < TAM; j++) {
+					System.out.print(matriz[i][j] + "|");
+				}
+			}
+		} else {
+			System.out.println("Número em um intervalo inválido");
+		}
+		media = soma / (TAM * TAM);
 
-        int matriz[][] = new int[num][num];
+		System.out.println("\n");
+		System.out.println("Média = " + media);
+		System.out.println("Soma = " + soma);
+		System.out.println("Maior = " + maior);
+		System.out.println("Menor = " + menor);
+		System.out.println("Pares = " + kpar);
+		System.out.println("Impares = " + kimp);
+		System.out.println("Diagonal P " + principal);
+		System.out.println("Diagonal S " + secundaria);
 
-        num = 0;
+		entrada.close();
 
-        for (int i = 0; i < num; i++)
-        {
-            for (int j = 0; j < num; j++)
-            {
-                matriz[i][j] = entrada.nextInt();
-                num = num + matriz[i][j];
+	}
 
-                if (matriz[i][j] > maior)
-                {
-                    maior = matriz[i][j];
-                }
-
-                if (matriz[i][j] < menor)
-                {
-                    menor = matriz[i][j];
-                }
-
-                if (matriz[i][j] % 2 == 0)
-                {
-                    k++;
-                }
-
-                if (matriz[i][j] % 2 == 1)
-                {
-                    k2++;
-                }
-
-                if (i == j)
-                {
-                    principal += matriz[i][j];
-                }
-
-                if ((i + j)  == (num - 1))
-                {
-                    secundaria += matriz[i][j];
-                }
-            }
-        }
-
-
-
-
-        entrada.close();
-    }
 }
